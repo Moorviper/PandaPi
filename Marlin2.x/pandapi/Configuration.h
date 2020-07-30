@@ -36,7 +36,7 @@
  * Advanced settings can be found in Configuration_adv.h
  *
  */
-#define CONFIGURATION_H_VERSION 020004
+#define CONFIGURATION_H_VERSION 20200730
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -71,7 +71,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(mark, PandaPi marlin  config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(danielkrah, PandaPi marlin  config)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 #define PANDAPI  1    // PandaPi shield for raspberry Pi printer
 #define CPU_32_BIT
@@ -138,11 +138,11 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+//#define CUSTOM_MACHINE_NAME "Prusa MK2s"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
-//#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
+//#define MACHINE_UUID "1bedbd81-1941-47f6-9692-63c0d1b6e264"
 
 // @section extruder
 
@@ -151,7 +151,7 @@
 #define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -491,9 +491,12 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
   
   // //  PANDAPI
-  #define DEFAULT_Kp 25
-  #define DEFAULT_Ki 2.0//1.08
-  #define DEFAULT_Kd 440
+  // #define DEFAULT_Kp 25
+  // #define DEFAULT_Ki 2.0//1.08
+  // #define DEFAULT_Kd 440
+  #define  DEFAULT_Kp 40.925
+  #define  DEFAULT_Ki 4.875
+  #define  DEFAULT_Kd 86.085
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -542,9 +545,12 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  //#define DEFAULT_bedKp 10.00
+  //#define DEFAULT_bedKi .023
+  //#define DEFAULT_bedKd 305.4
+  #define  DEFAULT_bedKp 126.13
+  #define  DEFAULT_bedKi 4.30
+  #define  DEFAULT_bedKd 924.76
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -565,7 +571,7 @@
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 170
+#define EXTRUDE_MINTEMP 135
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
@@ -679,13 +685,13 @@
  */
 #define X_DRIVER_TYPE  TMC2209
 #define Y_DRIVER_TYPE  TMC2209
-#define Z_DRIVER_TYPE  TMC2209
+#define Z_DRIVER_TYPE  LV8729
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE TMC2209
+#define E0_DRIVER_TYPE TMC2100
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -737,14 +743,14 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 93 }   //Orig { 80, 80, 4000, 500 } 93*2 = DRV8825 1/32 Stepps
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100,100,3200/8,161.3 }   //Orig { 80, 80, 4000, 500 } 93*2 = DRV8825 1/32 Stepps
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 12, 120 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -758,7 +764,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
  //  PANDAPI
-#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 50, 1500 }
+#define DEFAULT_MAX_ACCELERATION      { 9000,9000,500,10000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -956,7 +962,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { -40, -30, -2.5 } //for mount BLtouch.https://www.thingiverse.com/thing:3584158 
+#define NOZZLE_TO_PROBE_OFFSET { 23, 9, -0.4 } //for mount BLtouch.https://www.thingiverse.com/thing:3584158 
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1076,7 +1082,7 @@
 
 //#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed
 
-//#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
+#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
 //#define Z_HOMING_HEIGHT  4      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
@@ -1092,16 +1098,16 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 220
-#define Y_BED_SIZE 220
+#define X_BED_SIZE 250
+#define Y_BED_SIZE 210
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
-#define Y_MIN_POS 0
+#define Y_MIN_POS -2.2
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 250
+#define Z_MAX_POS 190
 
 /**
  * Software Endstops
@@ -1481,13 +1487,33 @@
 
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_HOTEND 205
+#define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
+#define PREHEAT_2_TEMP_HOTEND 250
+#define PREHEAT_2_TEMP_BED    100
+#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+
+#define PREHEAT_1_LABEL       "HIPS"
+#define PREHEAT_1_TEMP_HOTEND 220
+#define PREHEAT_1_TEMP_BED    100
+#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+
+#define PREHEAT_2_LABEL       "PP"
+#define PREHEAT_2_TEMP_HOTEND 254
+#define PREHEAT_2_TEMP_BED    100
+#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+
+#define PREHEAT_1_LABEL       "PET"
+#define PREHEAT_1_TEMP_HOTEND 240
+#define PREHEAT_1_TEMP_BED     90
+#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+
+#define PREHEAT_2_LABEL       "FLEX"
+#define PREHEAT_2_TEMP_HOTEND 230
+#define PREHEAT_2_TEMP_BED     50
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 /**
@@ -1720,7 +1746,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-//#define REVERSE_ENCODER_DIRECTION
+#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1743,7 +1769,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
